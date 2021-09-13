@@ -26,8 +26,8 @@ const quotes = [
   { 
     quote: "This above all: To thine own self be true, And it must follow, as the night the day, Thou canst not then be false to any man",
     source: "Shakespeare",
-    citation: "Hamlet",
-    year: 1603
+    
+    
 
   },
   { 
@@ -50,36 +50,36 @@ const quotes = [
 /***
  * `getRandomQuote` function
 ***/
-function getRandomQuote(array) {
-  let randomNum = Math.round(Math.random() * quotes.length);
+function getRandomQuote() {
+  const randomNum = Math.floor(Math.random() * quotes.length);
   return quotes[randomNum];
 }
-// getRandomQuote()
-
 
 /***
  * `printQuote` function
 ***/
 function printQuote() {
-  let quoteBrowser = getRandomQuote();
-  let html = 
-    `<p class="quote"> ${quotes.quote} </p>`;
-    `<p class="source"> ${quotes.source}` 
+  const quoteBrowser = getRandomQuote();
+  let html = `
+    <p class="quote">${quoteBrowser.quote}</p>
+    <p class="source">${quoteBrowser.source}`; 
 
-      if (quotes.citation) {
-        html += `<span class="citation"> ${quotes.citation} </span>`;
-      };
-      if (quotes.year) {   
-          html += `<span class="year"> ${quotes.year} </span>;`
-      };
-    `</p>`
-
-  return quoteBrowser;    
+  if (quoteBrowser.citation) {
+    const citationHTML = `<span class="citation">${quoteBrowser.citation}</span>`;
+    html = html.concat(citationHTML);
+  }
+  if (quoteBrowser.year) {   
+      const yearHTML = `<span class="year"> ${quoteBrowser.year}</span>`;
+      html = html.concat(yearHTML);
+  }
+  html = html.concat(`</p>`);
+  return document.getElementById('quote-box').innerHTML = html; 
 }
 
-document.getElementById('quote-box').innerHTML = printQuote(); 
 
-console.log(printQuote)
+ 
+
+
 
 /***
  * click event listener for the print quote button
